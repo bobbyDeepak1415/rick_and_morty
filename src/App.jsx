@@ -4,17 +4,24 @@ import axios from "axios";
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(false);
 
   const getData = async () => {
     try {
+      setLoading(true);
       const res = await axios.get("https://rickandmortyapi.com/api/character");
       setUsers(res.data.results);
     } catch (err) {
       console.error("trouble fetching data", err);
       return [];
+    } finally {
+      setLoading(false);
     }
   };
+
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.status === filter);
 
   useEffect(() => {
     getData();
@@ -31,8 +38,20 @@ const App = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: "column",
       }}
     >
+      <select
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+        style={{ marginTop: "1rem", padding: "0.5rem" }}
+      >
+        <option value="All">All</option>
+        <option value="Alive">Alive</option>
+        <option value="Dead">Dead</option>
+        <option value="unknown">Unknown</option>
+      </select>
+
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -55,7 +74,7 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => {
+            {filteredUsers.map((user, index) => {
               return (
                 <tr key={index}>
                   <td style={cellStyle}>{user.id}</td>
