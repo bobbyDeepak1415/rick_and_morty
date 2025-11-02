@@ -14,33 +14,49 @@ const App = () => {
     getData();
   }, []);
 
-
-  const cellStyle={
-    padding:"1rem",
-    border:"1px solid black"
-  }
+  const cellStyle = {
+    padding: "1rem",
+    border: "1px solid black",
+  };
 
   return (
-    <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-      <table style={{border:"1px solid black",width:"50rem",marginTop:"2rem",height:"80vh"}}>
-        <thead style={{backgroundColor:"lightgray"}}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <table
+        style={{
+          border: "1px solid black",
+          width: "50rem",
+          marginTop: "2rem",
+          height: "80vh",
+        }}
+      >
+        <thead style={{ backgroundColor: "lightgray" }}>
           <tr>
             <td style={cellStyle}>ID</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Species</td>
-            <td>Gender</td>
+            <td style={cellStyle}>Name</td>
+            <td style={cellStyle}>Status</td>
+            <td style={cellStyle}>Gender</td>
+            <td style={cellStyle}>Image</td>
           </tr>
         </thead>
         <tbody>
           {users.map((user, index) => {
-            return <tr key={index}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.status}</td>
-              <td>{user.species}</td>
-              <td>{user.gender}</td>
-            </tr>
+            return (
+              <tr key={index}>
+                <td style={cellStyle}>{user.id}</td>
+                <td style={cellStyle}>{user.name}</td>
+                <td style={cellStyle}>{user.status}</td>
+                <td style={cellStyle}>{user.gender}</td>
+                <td style={cellStyle} >
+                  <img style={{objectFit:"contain"}} width="80px" src={user.image}></img>
+                </td>
+              </tr>
+            );
           })}
         </tbody>
       </table>
