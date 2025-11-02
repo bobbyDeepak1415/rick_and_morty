@@ -31,8 +31,11 @@ const App = () => {
     border: "1px solid black",
   };
 
-  const filteredUsers =
-    filter === "All" ? users : users.filter((user) => user.status === filter);
+  const filteredUsers = () => {
+    return filter === "All"
+      ? users
+      : users.filter((user) => user.status === filter);
+  };
 
   return (
     <div

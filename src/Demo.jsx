@@ -64,6 +64,7 @@ const Demo = () => {
             width: "70vw",
             height: "70vh",
             textAlign: "left",
+            borderCollapse: "collapse",
           }}
         >
           <thead>
