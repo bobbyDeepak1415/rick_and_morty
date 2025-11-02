@@ -6,6 +6,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const getData = async () => {
     try {
@@ -13,7 +14,8 @@ const App = () => {
       const res = await axios.get("https://rickandmortyapi.com/api/character");
       setUsers(res.data.results);
     } catch (err) {
-      console.error("trouble fetching data", err);
+      // console.error();
+      setError("trouble fetching data", err);
       return [];
     } finally {
       setLoading(false);
@@ -41,16 +43,14 @@ const App = () => {
         flexDirection: "column",
       }}
     >
-      <select
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-        style={{ marginTop: "1rem", padding: "0.5rem" }}
-      >
+      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
         <option value="All">All</option>
         <option value="Alive">Alive</option>
         <option value="Dead">Dead</option>
-        <option value="unknown">Unknown</option>
+        <option value="unknown">unknown</option>
       </select>
+
+      {error && <p>{error}</p>}
 
       {loading ? (
         <p>Loading...</p>
