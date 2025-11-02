@@ -22,7 +22,6 @@ const App = () => {
     }
   };
 
-  
   useEffect(() => {
     getData();
   }, []);
@@ -31,6 +30,9 @@ const App = () => {
     padding: "1rem",
     border: "1px solid black",
   };
+
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.status === filter);
 
   return (
     <div
@@ -41,7 +43,17 @@ const App = () => {
         flexDirection: "column",
       }}
     >
-      
+      <select
+        style={{ padding: "0.5rem" }}
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      >
+        <option value="All">All</option>
+        <option value="Alive">Alive</option>
+        <option value="Dead">Dead</option>
+        <option value="unknown">unKnown</option>
+      </select>
+
       {error && <p>{error}</p>}
 
       {loading ? (
@@ -66,7 +78,7 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => {
+            {filteredUsers.map((user, index) => {
               return (
                 <tr key={index}>
                   <td style={cellStyle}>{user.id}</td>
