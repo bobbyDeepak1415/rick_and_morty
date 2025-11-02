@@ -42,11 +42,15 @@ const Demo = () => {
     >
       {error && <p>{error}</p>}
 
-      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+      <select
+        style={{ padding: "0.5rem" }}
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      >
         <option value="All">All</option>
         <option value="Alive">Alive</option>
         <option value="Dead">Dead</option>
-        <option value="unKnown">unKnown</option>
+        <option value="unknown">unKnown</option>
       </select>
 
       {loading ? (
