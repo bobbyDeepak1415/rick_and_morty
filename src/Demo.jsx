@@ -1,48 +1,69 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const Demo = () => {
-  const lights = ["red", "orange", "green"];
-  const [currentLight, setCurrentLight] = useState(0);
+  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentLight((prev) => (prev + 1) % lights.length);
-    }, 1200);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const getColour = (index) => {
-    return currentLight === index ? lights[index] : "gray";
+  const getData = async () => {
+    const res = await axios.get("https://rickandmortyapi.com/api/character");
+    setUsers(res.data.results);
   };
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const cellStyle={
+    border:"1px solid black",
+    padding:"1rem"
+
+  }
+
   return (
-    <div style={{ justifyContent: "center", display: "flex" }}>
-      <div
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <table
         style={{
-          backgroundColor: "black",
-          height: "25rem",
-          width: "12rem",
-          justifyContent: "center",
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
+          marginTop: "2rem",
+          border: "1px solid black",
+          width: "70vw",
+          height: "70vh",
+          textAlign: "left",
         }}
       >
-        {lights.map((light, index) => {
-          return (
-            <div
-              style={{
-                height: "5rem",
-                width: "5rem",
-                backgroundColor: getColour(index),
-                margin: "auto",
-                borderRadius: "50%",
-              }}
-            ></div>
-          );
-        })}
-      </div>
+        <thead>
+          <tr>
+            <td style={cellStyle}>ID</td>
+            <td style={cellStyle}>Name</td>
+            <td style={cellStyle}>Status</td>
+            <td style={cellStyle}>Gender</td>
+            <td style={cellStyle}>Image</td>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => {
+            return (
+              <tr>
+                <td style={cellStyle}>{user.id}</td>
+                <td style={cellStyle}>{user.name}</td>
+                <td style={cellStyle}>{user.status}</td>
+                <td style={cellStyle}>{user.gender}</td>
+                <td style={cellStyle}>
+                  <img
+                    style={{ height: "70px", width: "70px",objectFit:"contain", }}
+                    src={user.image}
+                  ></img>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
