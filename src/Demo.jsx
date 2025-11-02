@@ -4,21 +4,19 @@ import React, { useEffect, useState } from "react";
 const Demo = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error,setError]=useState("")
-  const [filter,setFilter]=useState("All")
+  const [error, setError] = useState("");
+  const [filter, setFilter] = useState("All");
 
   const getData = async () => {
-    try{
-      setLoading(true)
+    try {
+      setLoading(true);
 
       const res = await axios.get("https://rickandmortyapi.com/api/character");
       setUsers(res.data.results);
-    }catch(err){
-      setError("trouble fetching data",err)
-
-
-    }finally{
-      setLoading(false)
+    } catch (err) {
+      setError("trouble fetching data", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -26,11 +24,13 @@ const Demo = () => {
     getData();
   }, []);
 
-  const cellStyle={
-    border:"1px solid black",
-    padding:"1rem"
+  const cellStyle = {
+    border: "1px solid black",
+    padding: "1rem",
+  };
 
-  }
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.status === filter);
 
   return (
     <div
@@ -38,17 +38,21 @@ const Demo = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: "column",
       }}
     >
-
-      <select value={filter} onChange={(e)=>setFilter(e.target.value)}>
+      <select
+        style={{ padding: "0.5rem" }}
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      >
         <option>All</option>
         <option>Alive</option>
         <option>Dead</option>
         <option>unknown</option>
       </select>
 
-{error && (<p>{error}</p>)}
+      {error && <p>{error}</p>}
 
       {loading ? (
         <p>Loading...</p>
@@ -72,7 +76,7 @@ const Demo = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => {
+            {filteredUsers.map((user) => {
               return (
                 <tr>
                   <td style={cellStyle}>{user.id}</td>
