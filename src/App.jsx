@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [users, setUsers] = useState([]);
+
+  const getData = async () => {
+    const res = await axios.get("https://rickandmortyapi.com/api/character");
+    setUsers(res.data.results);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+
+  const style={
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    padding:"1rem",
+    margin:"auto",
+    border:"1px solid black"
+
+
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+      
+        {users.map((user, index) => {
+          return (
+            <table style={{width:"40rem"}}>
+              <thead style={style}>
+                <tr >
+                  <td>Sno.</td>
+                  <td>name</td>
+                  <td>status</td>
+                  <td>species</td>
+                  <td>gender</td>
+                </tr>
+              </thead>
+              <tbody style={style}>
+                <tr key={index}>
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.status}</td>
+                  <td>{user.species}</td>
+                  <td>{user.gender}</td>
+                </tr>
+              </tbody>
+              
+            </table>
+          );
+        })}
+      
+    </div>
+  );
 }
 
-export default App
+export default App;
