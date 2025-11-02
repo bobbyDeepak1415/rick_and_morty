@@ -14,12 +14,18 @@ const App = () => {
     getData();
   }, []);
 
+
+  const cellStyle={
+    padding:"1rem",
+    border:"1px solid black"
+  }
+
   return (
-    <div>
-      <table>
-        <thead>
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+      <table style={{border:"1px solid black",width:"50rem",marginTop:"2rem",height:"80vh"}}>
+        <thead style={{backgroundColor:"lightgray"}}>
           <tr>
-            <td>ID</td>
+            <td style={cellStyle}>ID</td>
             <td>Name</td>
             <td>Status</td>
             <td>Species</td>
@@ -28,7 +34,13 @@ const App = () => {
         </thead>
         <tbody>
           {users.map((user, index) => {
-            return <li key={index}>{user.name}</li>;
+            return <tr key={index}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.status}</td>
+              <td>{user.species}</td>
+              <td>{user.gender}</td>
+            </tr>
           })}
         </tbody>
       </table>
