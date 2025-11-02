@@ -5,6 +5,7 @@ const Demo = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [filter, setFilter] = useState("All");
 
   const getData = async () => {
     try {
@@ -27,15 +28,26 @@ const Demo = () => {
     padding: "1rem",
   };
 
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.status === filter);
+
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        flexDirection: "column",
       }}
     >
       {error && <p>{error}</p>}
+
+      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <option value="All">All</option>
+        <option value="Alive">Alive</option>
+        <option value="Dead">Dead</option>
+        <option value="unKnown">unKnown</option>
+      </select>
 
       {loading ? (
         <p>Loading...</p>
@@ -58,7 +70,7 @@ const Demo = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => {
+            {filteredUsers.map((user) => {
               return (
                 <tr key={user.id}>
                   <td style={cellStyle}>{user.id}</td>
