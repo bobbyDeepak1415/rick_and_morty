@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import axios from "axios";
 
@@ -31,11 +31,11 @@ const App = () => {
     border: "1px solid black",
   };
 
-  const filteredUsers = () => {
+  const filteredUsers = useMemo(() => {
     return filter === "All"
       ? users
       : users.filter((user) => user.status === filter);
-  };
+  },[filter,users]);
 
   return (
     <div
