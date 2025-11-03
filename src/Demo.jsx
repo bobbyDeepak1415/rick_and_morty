@@ -31,9 +31,8 @@ const Demo = () => {
     border: "1px solid black",
   };
 
-  const filteredUsers={
-    filter==="All" ? users :users.filter
-  }
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.status === filter);
 
   return (
     <div
@@ -49,10 +48,10 @@ const Demo = () => {
         onChange={(e) => setFilter(e.target.value)}
         style={{ padding: "0.5rem", width: "4rem", marginTop: "1rem" }}
       >
-        <option>All</option>
-        <option>Alive</option>
-        <option>Dead</option>
-        <option>unknown</option>
+        <option value="All">All</option>
+        <option value="Alive">Alive</option>
+        <option value="Dead">Dead</option>
+        <option value="unknown">unknown</option>
       </select>
 
       {error && <p>{error}</p>}
@@ -78,7 +77,7 @@ const Demo = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => {
+            {filteredUsers.map((user, index) => {
               return (
                 <tr key={index}>
                   <td style={cellStyle}>{user.id}</td>
