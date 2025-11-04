@@ -18,12 +18,13 @@ function display(arr1) {
   arr1.sort()
   for (let i =1; i < arr1.length; i++) {
     if (arr1[i] !== arr1[i - 1]) {
-      arr1[i]+=1
-      k++;
+      arr1[i]=arr1[k]
+    k++
     }
   }
 
-  return [k,arr1]
+  return arr1.slice(0,k)
+
 }
 
 console.log(display(arr1));
