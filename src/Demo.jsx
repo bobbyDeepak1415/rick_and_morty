@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -26,7 +25,7 @@ const Demo = () => {
       }
     }
 
-    setStatuses(["All", ...uniqueStatuses.slice(0, k)]);
+    setStatuses([...uniqueStatuses.slice(0, k)]);
   };
 
   useEffect(() => {
