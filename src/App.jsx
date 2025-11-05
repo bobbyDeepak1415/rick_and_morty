@@ -16,6 +16,7 @@ const App = () => {
       const result = res.data.results;
 
       let uniqueStatuses = result.map((user) => user.status);
+      uniqueStatuses.sort();
 
       let k = 1;
 
@@ -26,8 +27,8 @@ const App = () => {
         }
       }
 
-      setUsers(result);
       setStatuses(["All", ...uniqueStatuses.slice(0, k)]);
+      setUsers(result);
     } catch (err) {
       setError("trouble fetching data", err);
       return [];
@@ -65,8 +66,8 @@ const App = () => {
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       >
-        {statuses.map((status) => {
-          return <option>{status}</option>;
+        {statuses.map((status, index) => {
+          return <option key={index}>{status}</option>;
         })}
       </select>
 
