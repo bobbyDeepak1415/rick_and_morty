@@ -7,14 +7,28 @@ const App = () => {
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [statuses, setStatuses] = useState([]);
 
   const getData = async () => {
     try {
       setLoading(true);
       const res = await axios.get("https://rickandmortyapi.com/api/character");
-      setUsers(res.data.results);
+      const result = res.data.results;
+
+      let uniqueStatuses = result.map((user) => user.status);
+
+      let k = 1;
+
+      for (let i = 1; i < uniqueStatuses.length; i++) {
+        if (uniqueStatuses[i] !== uniqueStatuses[i - 1]) {
+          uniqueStatuses[k] = uniqueStatuses[i];
+          k++;
+        }
+      }
+
+      setUsers(result);
+      setStatuses(["All", ...uniqueStatuses.slice(0, k)]);
     } catch (err) {
-      // console.error();
       setError("trouble fetching data", err);
       return [];
     } finally {
@@ -51,8 +65,8 @@ const App = () => {
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       >
-        {users.map((user) => {
-          return <option>{user.status}</option>;
+        {statuses.map((status) => {
+          return <option>{status}</option>;
         })}
       </select>
 
