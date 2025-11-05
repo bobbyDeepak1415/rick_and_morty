@@ -35,7 +35,7 @@ const App = () => {
     return filter === "All"
       ? users
       : users.filter((user) => user.status === filter);
-  },[filter,users]);
+  }, [filter, users]);
 
   return (
     <div
@@ -51,10 +51,9 @@ const App = () => {
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       >
-        <option value="All">All</option>
-        <option value="Alive">Alive</option>
-        <option value="Dead">Dead</option>
-        <option value="unknown">unKnown</option>
+        {users.map((user) => {
+          return <option>{user.status}</option>;
+        })}
       </select>
 
       {error && <p>{error}</p>}

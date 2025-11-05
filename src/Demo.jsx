@@ -25,7 +25,7 @@ const Demo = () => {
       }
     }
 
-    setStatuses([...uniqueStatuses.slice(0, k)]);
+    setStatuses(["All", ...uniqueStatuses.slice(0, k)]);
   };
 
   useEffect(() => {
