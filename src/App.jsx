@@ -7,7 +7,6 @@ const App = () => {
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [statuses, setStatuses] = useState([]);
 
   const getData = async () => {
     try {
@@ -15,19 +14,6 @@ const App = () => {
       const res = await axios.get("https://rickandmortyapi.com/api/character");
       const result = res.data.results;
 
-      let uniqueStatuses = result.map((user) => user.status);
-      uniqueStatuses.sort();
-
-      let k = 1;
-
-      for (let i = 1; i < uniqueStatuses.length; i++) {
-        if (uniqueStatuses[i] !== uniqueStatuses[i - 1]) {
-          uniqueStatuses[k] = uniqueStatuses[i];
-          k++;
-        }
-      }
-
-      setStatuses(["All", ...uniqueStatuses.slice(0, k)]);
       setUsers(result);
     } catch (err) {
       setError("trouble fetching data", err);
@@ -66,9 +52,10 @@ const App = () => {
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       >
-        {statuses.map((status, index) => {
-          return <option key={index}>{status}</option>;
-        })}
+        <option value="All">All</option>
+        <option value="Alive">Alive</option>
+        <option value="Dead">All</option>
+        <option value="unknown">unKnown</option>
       </select>
 
       {error && <p>{error}</p>}
