@@ -7,12 +7,19 @@ const App = () => {
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [filters, setFilters] = useState([]);
 
   const getData = async () => {
     try {
       setLoading(true);
       const res = await axios.get("https://rickandmortyapi.com/api/character");
       const result = res.data.results;
+
+      const uniqueFilters = Array.from(
+        new Set(result.map((user) => user.status))
+      );
+
+      setFilters(["All", ...uniqueFilters]);
 
       setUsers(result);
     } catch (err) {
@@ -52,10 +59,9 @@ const App = () => {
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       >
-        <option value="All">All</option>
-        <option value="Alive">Alive</option>
-        <option value="Dead">All</option>
-        <option value="unknown">unKnown</option>
+        {filters.map((filter) => {
+          return <option>{filter}</option>;
+        })}
       </select>
 
       {error && <p>{error}</p>}
@@ -93,7 +99,7 @@ const App = () => {
                     <img
                       style={{ objectFit: "contain" }}
                       width="80px"
-                      src={user.image}
+                      // src={user.image}
                     ></img>
                   </td>
                 </tr>
