@@ -12,20 +12,11 @@ const Demo = () => {
     const result = res.data.results;
 
     setUsers(result);
+    const uniqueStatuses = Array.from(
+      new Set(result.map((user) => user.status))
+    );
 
-    let uniqueStatuses = result.map((user) => user.status);
-    uniqueStatuses.sort();
-
-    let k = 1;
-
-    for (let i = 1; i < uniqueStatuses.length; i++) {
-      if (uniqueStatuses[i] !== uniqueStatuses[i - 1]) {
-        uniqueStatuses[k] = uniqueStatuses[i];
-        k++;
-      }
-    }
-
-    setStatuses(["All", ...uniqueStatuses.slice(0, k)]);
+    setStatuses(["All", ...uniqueStatuses]);
   };
 
   useEffect(() => {
