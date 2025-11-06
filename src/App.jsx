@@ -15,11 +15,18 @@ const App = () => {
       const res = await axios.get("https://rickandmortyapi.com/api/character");
       const result = res.data.results;
 
-      const uniqueFilters = Array.from(
-        new Set(result.map((user) => user.status))
-      );
+      let uniqueStatuses = result.map((user) => user.status);
+      uniqueStatuses.sort();
+      let k = 1;
 
-      setFilters(["All", ...uniqueFilters]);
+      for (let i = 1; i < uniqueStatuses.length; i++) {
+        if (uniqueStatuses[i] !== uniqueStatuses[i - 1]) {
+          uniqueStatuses[k] = uniqueStatuses[i];
+          k++;
+        }
+      }
+
+      setFilters(["All", ...uniqueStatuses.slice(0, k)]);
 
       setUsers(result);
     } catch (err) {
