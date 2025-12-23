@@ -24,7 +24,7 @@ const App = () => {
           uniqueStatuses[k] = uniqueStatuses[i];
           k++;
         }
-      }
+      }.
 
       setFilters(["All", ...uniqueStatuses.slice(0, k)]);
 
