@@ -16,7 +16,7 @@ const Demo3 = () => {
   return (
     <div>
       {step ===
-        1(
+        1&&(
           <>
             <h2>Step1:Basic Information</h2>
 
