@@ -14,6 +14,6 @@ const Demo3 = () => {
   const isStep2Valid = formData.role && formData.terms;
 
   return <div></div>;
-};
+};...Demo3.apply.
 
 export default Demo3;
