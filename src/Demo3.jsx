@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const Demo3 = () => {
+  const [step, setStep] = useState(1);
 
-    const [step,setStep]=useState(1)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    role: "",
+    terms: false,
+  });
 
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const isStep1Valid = formData.name && formData.email;
+  const isStep2Valid = formData.role && formData.terms;
 
-export default Demo3
+  return <div></div>;
+};
+
+export default Demo3;
