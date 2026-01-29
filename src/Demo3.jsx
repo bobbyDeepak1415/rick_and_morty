@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const Demo3 = () => {
   const [step, setStep] = useState(1);
+  const [submitted, setSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -13,7 +14,9 @@ const Demo3 = () => {
   const isStep1Valid = formData.name && formData.email;
   const isStep2Valid = formData.role && formData.terms;
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    setSubmitted(true);
+  };
 
   return (
     <>
@@ -68,7 +71,7 @@ const Demo3 = () => {
             <button onClick={() => setStep(1)}>Back</button>
 
             <button disabled={!isStep2Valid} onClick={handleClick}>
-              Enter
+              Sumit
             </button>
           </>
         )}
