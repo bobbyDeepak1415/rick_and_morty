@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Demo3 = () => {
+
+    const [step,setStep]=useState(1)
+
   return (
     <div>
-      Hello
+      
     </div>
   )
 }
