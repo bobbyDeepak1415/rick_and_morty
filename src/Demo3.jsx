@@ -17,11 +17,23 @@ const Demo3 = () => {
 
   if (submitForm) {
     return (
-      <div>
+      <div style={{ height: "100vh", backgroundColor: "saddlebrown" }}>
         <ul>
           <li>
-            <b>Name</b>
+            <b>Name:</b>
             {userDetails.name}
+          </li>
+          <li>
+            <b>Email:</b>
+            {userDetails.email}
+          </li>
+          <li>
+            <b>Role:</b>
+            {userDetails.role}
+          </li>
+          <li>
+            <b>Terms and conditions accepted:</b>
+            {userDetails.name ? "Yes" : "No"}
           </li>
         </ul>
       </div>
@@ -73,7 +85,7 @@ const Demo3 = () => {
             type="checkbox"
             checked={userDetails.terms}
             onChange={(e) =>
-              setUserDetails({ ...userDetails, email: e.target.checked })
+              setUserDetails({ ...userDetails, terms: e.target.checked })
             }
           />
           <button disabled={!isPage2Valid} onClick={() => setSubmitForm(true)}>
