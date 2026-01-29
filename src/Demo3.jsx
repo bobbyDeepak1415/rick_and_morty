@@ -52,10 +52,10 @@ const Demo3 = () => {
                 setFormData({ ...formData, role: e.target.value })
               }
             >
-              <option>Select Role</option>
-              <option>Plumber</option>
-              <option>Engineer</option>
-              <option>fighter</option>
+              <option value="">Select Role</option>
+              <option value="Plumber">Plumber</option>
+              <option value="Engineer">Engineer</option>
+              <option value="Fighter">Fighter</option>
             </select>
             <input
               onChange={(e) =>
@@ -63,8 +63,9 @@ const Demo3 = () => {
               }
               checked={formData.terms}
               type="checkbox"
-            ></input>
-            <p>Terms and conditions</p>
+            />
+            <label>Terms and conditions</label>
+            <button onClick={() => setStep(1)}>Back</button>
 
             <button disabled={!isStep2Valid} onClick={handleClick}>
               Enter
