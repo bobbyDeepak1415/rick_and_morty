@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Demo3 = () => {
   const [page, setPage] = useState(1);
 
-  const [onSubmit,setOnSubmit]=useState(false)
+  const [onSubmit, setOnSubmit] = useState(false);
 
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -15,8 +15,21 @@ const Demo3 = () => {
   const isPage1Valid = userDetails.name && userDetails.email;
   const isPage2Valid = userDetails.role && userDetails.terms;
 
+  if (onSubmit) {
+    return (
+      <>
+        <p>{userDetails.name}</p>
+        <p>{userDetails.email}</p>
+        <p>{userDetails.role}</p>
+        <p>
+          {" "}
+          <b>Terms and conditions</b>
+          {userDetails.terms ? "Yes" : "No"}
+        </p>
+      </>
+    );
+  }
 
-  
   return (
     <div>
       {page === 1 && (
@@ -55,13 +68,13 @@ const Demo3 = () => {
           </select>
           <input
             type="checkbox"
-            checked={true}
+            checked={userDetails.terms}
             // *
             onChange={(e) =>
               setUserDetails({ ...userDetails, terms: e.target.checked })
             }
           ></input>
-          <button disabled={!isPage2Valid} onClick={()=>onSubmit(true)}>
+          <button disabled={!isPage2Valid} onClick={() => setOnSubmit(true)}>
             Enter
           </button>
         </div>
