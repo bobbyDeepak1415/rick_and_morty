@@ -13,7 +13,7 @@ const Demo = () => {
 
     setUsers(result);
     const uniqueStatuses = Array.from(
-      new Set(result.map((user) => user.status))
+      new Set(result.map((user) => user.status)),
     );
 
     setStatuses(["All", ...uniqueStatuses]);
