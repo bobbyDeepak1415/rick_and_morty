@@ -13,53 +13,66 @@ const Demo3 = () => {
   const isStep1Valid = formData.name && formData.email;
   const isStep2Valid = formData.role && formData.terms;
 
-  const handleClick=()=>{
-
-  }
+  const handleClick = () => {};
 
   return (
     <>
-    <div>
-      {step === 1 && (
+      <div>
+        {step === 1 && (
           <>
-          <h2>Step1:Basic Information</h2>
+            <h2>Step1:Basic Information</h2>
 
-          <input
-            value={formData.name}
-            placeholder="full name"
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            <input
+              value={formData.name}
+              placeholder="full name"
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
             ></input>
-          <input
-            type="email"
-            onChange={(e) =>
+            <input
+              type="email"
+              onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
-            }
-            value={formData.email}
+              }
+              value={formData.email}
             ></input>
-          <button disabled={!isStep1Valid} onClick={() => setStep(2)}>
-            Enter
-          </button>
-        </>
-      )}
-    </div>
-    <div>{step===2&&(
-        <>
-        <h2>step2:enter your role here</h2>
-        <select value={formData.role} onChange={(e)=>setFormData({...formData,role:e.target.value})}>
-            <option>Developer</option>
-            <option>Plumber</option>
-            <option>Engineer</option>
-            <option>fighter</option>
-        </select>
-        <input value={formData.terms} type="checkbox" ></input>
-        <p>Terms and conditions</p>
+            <button disabled={!isStep1Valid} onClick={() => setStep(2)}>
+              Enter
+            </button>
+          </>
+        )}
+      </div>
+      <div>
+        {step === 2 && (
+          <>
+            <h2>step2:enter your role here</h2>
+            <select
+              value={formData.role}
+              onChange={(e) =>
+                setFormData({ ...formData, role: e.target.value })
+              }
+            >
+              <option>Select Role</option>
+              <option>Plumber</option>
+              <option>Engineer</option>
+              <option>fighter</option>
+            </select>
+            <input
+              onChange={(e) =>
+                setFormData({ ...formData, terms: e.target.checked })
+              }
+              checked={formData.terms}
+              type="checkbox"
+            ></input>
+            <p>Terms and conditions</p>
 
-        <button disabled={!isStep2Valid} onClick={handleClick}>Enter</button>
-        </>
-    )}
-
-    </div>
-      </>
+            <button disabled={!isStep2Valid} onClick={handleClick}>
+              Enter
+            </button>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 
