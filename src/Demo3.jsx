@@ -10,8 +10,23 @@ const Demo3 = () => {
     terms: false,
   });
 
+  const [submitForm, setSubmitForm] = useState(false);
+
   const isPage1Valid = userDetails.name && userDetails.email;
   const isPage2Valid = userDetails.role && userDetails.terms;
+
+  if (submitForm) {
+    return (
+      <div>
+        <ul>
+          <li>
+            <b>Name</b>
+            {userDetails.name}
+          </li>
+        </ul>
+      </div>
+    );
+  }
 
   return (
     <div style={{ height: "100vh", backgroundColor: "gray" }}>
@@ -53,15 +68,15 @@ const Demo3 = () => {
             <option value="manager">Manager</option>
             <option value="tester">Tester</option>
           </select>
-
+          <label>Accept terms and conditions:</label>
           <input
-          type="checkbox"
+            type="checkbox"
             checked={userDetails.terms}
             onChange={(e) =>
               setUserDetails({ ...userDetails, email: e.target.checked })
             }
           />
-          <button disabled={!isPage1Valid} onClick={() => setPage(2)}>
+          <button disabled={!isPage2Valid} onClick={() => setSubmitForm(true)}>
             Enter
           </button>
         </div>
