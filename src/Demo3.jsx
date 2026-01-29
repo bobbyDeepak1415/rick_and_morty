@@ -18,6 +18,18 @@ const Demo3 = () => {
     setSubmitted(true);
   };
 
+  if (submitted) {
+    return (
+      <div>
+        <h2>Summary</h2>
+        <p>{formData.name}</p>
+        <p>{formData.email}</p>
+        <p>{formData.role}</p>
+        <p>{formData.terms ? "Yes" : "No"}</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div>
