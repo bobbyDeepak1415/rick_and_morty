@@ -19,7 +19,7 @@ const Demo2 = () => {
           Array.from(users.map((user) => user.status)),
         );
 
-        setStatuses(uniqueStatuses);
+        setStatuses([..."All", ...uniqueStatuses]);
       } catch (e) {
         console.log("failed To fetch...", e);
       }
@@ -33,8 +33,8 @@ const Demo2 = () => {
   return (
     <div style={{ height: "100vh", backgroundColor: "slategray" }}>
       <select onChange={(e) => setFilter(e.target.value)}>
-        {statuses.map((status) => {
-          return <option>{status}</option>;
+        {statuses.map((status, index) => {
+          return <option key={index}>{status}</option>;
         })}
       </select>
 
