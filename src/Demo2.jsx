@@ -25,7 +25,31 @@ const Demo2 = () => {
     fetchData();
   });
 
-  return <div style={{ height: "100vh", backgroundColor: "slategray" }}></div>;
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.status === filter);
+
+  return (
+    <div style={{ height: "100vh", backgroundColor: "slategray" }}>
+      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        {statuses.map((status, index) => {
+          return (
+            <option key={index} value={status}>
+              {status}
+            </option>
+          );
+        })}
+      </select>
+
+      {filteredUsers.map((user) => {
+        return (
+          <li key={user.id}>
+            {user.name}:-
+            <span>{user.status}</span>
+          </li>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Demo2;
