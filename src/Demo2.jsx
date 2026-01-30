@@ -30,9 +30,10 @@ const Demo2 = () => {
   const filteredUsers =
     filter === "All" ? users : users.filter((user) => user.status === filter);
 
+  
   return (
     <div style={{ height: "100vh", backgroundColor: "slategray" }}>
-      <select onChange={(e) => setFilter(e.target.value)}>
+      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
         {statuses.map((status, index) => {
           return <option key={index}>{status}</option>;
         })}
