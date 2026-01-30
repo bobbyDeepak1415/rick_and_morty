@@ -6,6 +6,8 @@ const Demo2 = () => {
 
   const [statuses, setStatuses] = useState([]);
 
+  const [filter, setFilter] = useState("All");
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -16,6 +18,8 @@ const Demo2 = () => {
         const uniqueStatuses = new Set(
           Array.from(users.map((user) => user.status)),
         );
+
+        setStatuses(uniqueStatuses);
       } catch (e) {
         console.log("failed To fetch...", e);
       }
@@ -23,10 +27,19 @@ const Demo2 = () => {
     fetchUsers();
   }, []);
 
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.filter);
+
   return (
     <div style={{ height: "100vh", backgroundColor: "slategray" }}>
+      <select onChange={(e) => setFilter(e.target.value)}>
+        {statuses.map((status) => {
+          return <option>{status}</option>;
+        })}
+      </select>
+
       <ul>
-        {users.map((user) => {
+        {filteredUsers.map((user) => {
           return (
             <li key={user.id}>
               {user.name}:<span>{user.status}</span>
