@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 
 const Demo2 = () => {
   const [users, setUsers] = useState([]);
-  const [statuses, setStatuses] = useState("All");
+  const [statuses, setStatuses] = useState([]);
 
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,12 +23,10 @@ const Demo2 = () => {
     fetchData();
   });
 
-  const filteredUsers=
+  const filteredUsers =
+    filter === "All" ? users : users.filter((user) => user.status === filter);
 
-  return <div style={{ height: "100vh", backgroundColor: "slategray" }}>
-
-
-  </div>;
+  return <div style={{ height: "100vh", backgroundColor: "slategray" }}></div>;
 };
 
 export default Demo2;
