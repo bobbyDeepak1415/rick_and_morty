@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { use, useEffect, useState } from "react";
 
 const Demo2 = () => {
   const [users, setUsers] = useState([]);
@@ -25,8 +26,24 @@ const Demo2 = () => {
 
   const filteredUsers =
     filter === "All" ? users : users.filter((user) => user.status === filter);
+  return (
+    <div style={{ height: "100vh", backgroundColor: "slategray" }}>
+      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        {statuses.map((status) => {
+          return <option value={status}>{status}</option>;
+        })}
+      </select>
 
-  return <div style={{ height: "100vh", backgroundColor: "slategray" }}></div>;
+      {filteredUsers.map((user) => {
+        return (
+          <li key={user.id}>
+            {user.name}:-
+            <span>{user.status}</span>
+          </li>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Demo2;
