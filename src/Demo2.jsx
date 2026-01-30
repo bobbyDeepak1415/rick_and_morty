@@ -28,7 +28,7 @@ const Demo2 = () => {
   }, []);
 
   const filteredUsers =
-    filter === "All" ? users : users.filter((user) => user.filter);
+    filter === "All" ? users : users.filter((user) => user.status === filter);
 
   return (
     <div style={{ height: "100vh", backgroundColor: "slategray" }}>
