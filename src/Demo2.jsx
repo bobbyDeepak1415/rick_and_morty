@@ -36,7 +36,7 @@ const Demo2 = () => {
             <option key={index} value={status}>
               {status}
             </option>
-          );
+          );...
         })}
       </select>
 
