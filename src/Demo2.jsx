@@ -3,9 +3,10 @@ import React, { use, useEffect, useState } from "react";
 
 const Demo2 = () => {
   const [users, setUsers] = useState([]);
-  const [statuses, setStatuses] = useState([]);
 
   const [filter, setFilter] = useState("All");
+
+  const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,26 +25,7 @@ const Demo2 = () => {
     fetchData();
   });
 
-  const filteredUsers =
-    filter === "All" ? users : users.filter((user) => user.status === filter);
-  return (
-    <div style={{ height: "100vh", backgroundColor: "slategray" }}>
-      <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-        {statuses.map((status) => {
-          return <option value={status}>{status}</option>;
-        })}
-      </select>
-
-      {filteredUsers.map((user) => {
-        return (
-          <li key={user.id}>
-            {user.name}:-
-            <span>{user.status}</span>
-          </li>
-        );
-      })}
-    </div>
-  );
+  return <div style={{ height: "100vh", backgroundColor: "slategray" }}></div>;
 };
 
 export default Demo2;
